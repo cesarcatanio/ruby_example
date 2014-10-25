@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+
 #se debe installar node.js sudo apt-get install nodejs
 #para poder correr el servidor ya que se usara el kde de java script
 #este estara ubicado en el pc y no en el explorador
@@ -89,5 +90,9 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+
+
+
 
 
