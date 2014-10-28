@@ -1,0 +1,182 @@
+#########################################################
+#crear aplicacion
+#########################################################
+
+#desde la consola nos ubicamos en la direccion donde queremos que quede la aplicacion y desde la consola ingresamos:
+#rails new nombredelaaplicacion
+
+#########################################################
+#iniciar rails
+#########################################################
+
+#El servidor de rails se inicia desde la consola con:
+#rails server
+
+#podemos ver la aplicacion creado corriendo en la direccion del navegador:
+#http://0.0.0.0:3000/
+
+#########################################################
+#Agregamos un repositorio a nuestro proyecto ruby_example
+#########################################################
+
+#desde la terminal con git init
+#u@e:~/ruby_example$ git init
+
+#agregamos todos nuestro repositorio
+#u@e:~/ruby_example$ git add .
+
+#realizamos el commit
+#u@e:~/ruby_example$ git commit -m "app inicial"
+
+#subimos los archivos al repositorio 
+#u@e:~/ruby_example$ git remote add origin https://github.com/cesarcatanio/ruby_example.git
+
+#finalmente un git push
+#u@e:~/ruby_example$ git push -u origin master
+
+#de esta manera nuestra aplicación se ha subido en nuestro repositorio
+
+############################################################
+#heroku
+############################################################
+
+#debe existir en el group :production la gema postgress y la gema 12factor
+#gem 'pg', '0.15.1'
+#gem 'rails_12factor', '0.0.2'
+
+
+#haremos un depliment en heroku
+
+#ingresamos a heroku por terminal
+#heroku login
+
+#creamos un subdominio para nuestra aplicación
+#heroku create
+
+#usamos git para hacerle push de nuestra aplicación a heroku
+#git push heroku master
+
+#abrimos la pagina de nuestra aplicación
+#debemos añadir la ruta raiz para que funcione
+#heroku open
+
+#podemos cambiar el nombre del subdominio
+#heroku rename rubyexample
+
+############################################################
+#Generación de modelos (Base de Datos)
+############################################################
+
+#Generamos el modelo User por consola
+#rails generate model User name:string email:string
+
+#Luego de crear nuestro modelo 
+#podemos migrarlo a una base de datos con el siguiente comando por consola
+#bundle exec rake db:migrate
+#el cual toma las migraciones que se encuentran en el archivo migrate de la aplicacion
+#y los migra a una base de datos
+
+#crearemos el crud para nuestro modelo User por consola
+#rails console --sandbox
+#luego nos dejara dentro de ruby en irb
+
+#Craremos el create de usuario en irb
+user=User.new
+#cuando no se le asigna atributos a new devolvera este objeto creado con todos sus atributos nil (null)
+
+#Ahora instanciaremos
+user.name="cesarcatanio"
+user.email="cesarcatanio@hotmail.com"
+#por ultimo usamos
+user.save 
+#el cual nos guardara los objetos creados en la base de datos no debe retornar true.
+
+#cabe destacar que llamamos atributos atravez de una variable atravez del . ejemplo user.name
+
+#otra forma de inicializar un usurio es mediante la funcion hash
+#user = User.new(name: "augustocatanio", email:"augustocatanio@hotmail.com")
+#y luego se debe guardar con 
+#user.save
+#retornandonos true
+
+#para mayor simplicidad podemos crear al usuario en una sola linea con
+#User.create(name:"nombreapellido",email:"corre@ejemplo.com")
+#lo cual retorna el registro creado pero se puede asignar a una variable para manejarlo como objeto como por ejemplo foo
+#foo = User.create(name:"nombreapellido",email:"corre@ejemplo.com")
+
+############################################################
+#CRUD
+############################################################
+
+#entramos a ruby por consola 
+#rails console --sandbox
+
+#######
+#Create
+#######
+
+#foo = User.create(name:"nombreapellido",email:"corre@ejemplo.com")
+
+#####
+#Read
+#####
+
+#encontrar un usuario en este caso sera el usuario con id 1
+#User.find(1)
+
+#encontrar un usuario por atributos especificos como el emial
+#User.find_by_email("cesarcatanio@hotmail.com")
+
+#encontrar el primer usuario
+#User.firts
+#encontrar todos los usuarios el cual retorna una matriz
+#User.all
+
+######
+#Update
+######
+
+#asignar atributos individualmente encontramos el usuario le asignamos los nuevos atributos y lo guardamos
+
+#user=User.find(1)
+#user.email = "aliss@gmail.com"
+#user.save
+
+#la otra forma es
+#user = User.find(1)
+#user.update_attributes(name:"alisss",email:"alis@gmail.com")
+
+#####
+#Drop
+#####
+
+#eliminar un usuario por id
+#user = User.find(2)
+#user.destroy
+
+#eliminar todos los usuarios
+#foo.destroy_all
+
+############################################################
+Validaciones
+############################################################
+
+#si al guardar un usuario nos retorna false
+#user.save => false
+#verificamos si las validaciones las cumple
+#user.valid? => false
+#en caso de que no cumpla la validacion buscamos el error
+#user.errors.full_messages
+
+############################################################
+Vistas
+############################################################
+
+#se crear en la carpeta de views ruby_example/app/views
+#dentro de ella creamos nuestras propias vistas como por ejemplo
+#posts y users 
+
+#dentro de una vista creamos los archivos
+#index.html.erb
+#show.html.erb
+#erb quiere decir archivos ruby embebidos

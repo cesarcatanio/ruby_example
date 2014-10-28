@@ -1,0 +1,38 @@
+<!-- Vista 'form' -->
+
+
+<!-- vista con un formulario  -->
+<!-- con el metodo form_for hacemos que el formulario sea editable -->
+<!-- vamos a editar en cada parte del formulario y nos ingresa el valor de @user -->
+<% form_for(@user) do |form| %>
+
+	<!-- aprovecharemos el comando errors.full_messages de la consola-->
+	<% if @user.errors.any? %>
+		<div id="error_explanation">
+			<h2>
+				<!-- contaremos el numero de errores -->
+				<% pluralize(@user.errors.count,"error") %>
+			</h2>
+			<ul>
+				<% @user.errors.full_messages.each do |msg| %>
+					<li>
+						<%= msg %>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+
+	<div class="field">
+		<% form.label :nombre %><br>
+		<% form.text_field :nombre %>
+	</div>
+	<div class="field">
+		<% form.label :email %><br>
+		<% form.text_field :email %>
+	</div>
+	<div class="actions">
+		<% form.submit 'Aceptar' %>
+	</div>
+<% end %>

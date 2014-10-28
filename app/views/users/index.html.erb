@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Ruby Example</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<h1>Listando Usuarios</h1>
+
+<!-- cuando el usuario se ha registrado desde la vista new nos dirijira a esta vista index y deberemos darle lugar al flash creado en el controller user cuyo valor tiene la palabra bienvenidos -->
+	<% flash.each do |key, value| %>
+		<div><%= value %></div>
+	<%end%>
+
+	<table>
+		<tr>
+			<td>Nombre</td>
+			<td>Email</td>
+		</tr>
+		<!-- variable con todos los usuarios -->
+		<!-- <% users=User.all%> -->
+		<!-- Mostrar los usuarios con codigo ruby -->
+		<!-- User.all nos mostrara todos los usuarios en la base de datos con each iremos iterando en cada uno de ellos a demas utilezaremos los bloques con do y end y le pasamos como parametro un nombre llamado user (variable) -->
+		<% @users.all.each do |user| %>
+			<tr>
+				<!-- con user.atributo listamos sus caracteristicas -->
+				<td>
+					<!-- link_to en ruby parecido a <a /> en html -->
+					<!-- vinculo link_to primero argumento texto del enlace segundo argumento rutas por ultimo podemos agregar un identificador un alert de js o funcionalidad de html  -->
+					
+					<!--Leer Usuario -->
+					<!-- al colocar como ruta user en el segundo argumento de link_to nos generara la siguiente url/users/id -->
+					<%= link_to user.name, user %>
+				</td>
+				<td>
+					<%= user.email %>
+				</td>
+				<td>
+					<!-- Editar usuario -->
+					<!-- al colocar como ruta edit_user_path(user) en el segundo argumento de link_to nos generara la siguiente url/users/id/edit -->
+					<%= link_to "Editar", edit_user_path(user) %>
+				</td>
+				<td>
+					<!-- Eliminar usuario -->
+					<!-- con user enviamos el usuario que queremos eliminar -->
+					<!-- luego llamamos el metodo borrar methos: :delete -->
+					<!-- por ultimo un js alert preguntandonos si estamos seguros -->
+					<%= link_to "Eliminar", user,method: :delete, confirm:"¿Está seguro?" %>
+				</td>
+			</tr>
+			<!-- fianl del bloque -->
+		<% end %>
+
+		<!-- condicional en este caso si no hay usuarios en la base de datos -->
+		<% if users.size == 0 %>
+			USUARIOS NO ENCONTRADOS
+		<% end %>
+	</table>	
+<!-- este enlace nos dirije a la vista new -->
+<%= link_to 'Nuevo usuario', new_user_path %>
+
+<!-- este enlace nos lleva a la url signup -->
+<%= link_to 'Registrar', '/signup' %>
+</body>
+</html>

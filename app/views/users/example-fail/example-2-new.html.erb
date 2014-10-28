@@ -1,0 +1,41 @@
+<h1>Registrar</h1>
+<!-- con esta vista se creara un usurio -->
+<% form_for(@user) do |form| %>
+
+	<!-- aprovecharemos el comando errors.full_messages de la consola-->
+	<% if @user.errors.any? %>
+		<div id="error_explanation">
+			<h2>
+				<!-- contaremos el numero de errores -->
+				<% pluralize(@user.errors.count,"error") %>
+			</h2>
+			<ul>
+				<% @user.errors.full_messages.each do |msg| %>
+					<li>
+						<%= msg %>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="field">
+		<% form.label :nombre %><br>
+		<% form.text_field :email %>
+	</div>
+	<div class="field">
+		<% form.label :email %><br>
+		<% form.text_field :email %>
+	</div>
+	<div class="field">
+		<% form.label :password %><br>
+		<% form.password_field :password %>
+	</div>
+	<div class="field">
+		<% form.label :password_confirmation %><br>
+		<% form.password_field :password_confirmation %>
+	</div>
+	<div class="actions">
+		<%= form.submit 'Crear mi cuenta' %>
+	</div>
+<% end %>
