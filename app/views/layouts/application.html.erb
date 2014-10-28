@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RubyExample</title>
+  <title>Ruby Example</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
+<!-- Aplica DRY -->
+<!-- este archivo factoriza la parte repititiva de todas nuestras paginas -->
+
+<!-- en pocas palabras este archivo es un esquema -->
+
+<!-- todas las paginas html tendran este codigo con exepción  de lo que hay dentro de body ya que tiene la etiqueda -->
+<!-- 
+	<%= 
+	#yield
+	 %> 
+-->
+
+
 <body>
 
 <%= yield %>

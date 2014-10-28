@@ -1,9 +1,18 @@
 RubyExample::Application.routes.draw do
+# este archivo nos define las rutas en el proyecto
+
+# Mis routers
+# con resources :users resfull crea de forma predeterminada las rutas de los controladores con el CRUD
+# de forma predeterminada son index destroy create show update new edit
+  resources :users
+  # creamos un router haciendo un match con el nombre de la url luego el nombre del controlador y le decimos la funcion o accion via get
+  match '/signup', to: 'users#new', via:'get'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'users#show'
+  # root 'users#show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
